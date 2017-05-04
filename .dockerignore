@@ -1,0 +1,11 @@
+.DS_Store
+.dockerignore
+.git
+.gitignore
+.gitlab-ci.yml
+.idea
+Dockerfile
+docker-compose.example.yml
+docker-compose.yml
+readme.md
+.gitattributes

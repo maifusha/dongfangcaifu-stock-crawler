@@ -1,0 +1,38 @@
+stages:
+  - build
+  - release
+  - deploy
+
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+
+build_image:
+  stage: build
+  script:
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+release_image:
+  stage: release
+  only:
+    - master
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+
+deploy_image:
+  stage: deploy
+  only:
+    - master
+  when: manual
+  script:
+    - mkdir -p ~/.ssh && cd ~/.ssh
+    - echo -e "$id_rsa" > id_rsa && chmod 600 id_rsa
+    - echo -e "$known_hosts" > known_hosts && chmod 644 known_hosts
+    - cd -
+    - ssh -p 8022 yunwei@118.89.177.52 "cd /srv/engine-cangweizaixian && docker-compose pull Cangweizaixian_Spider && docker-compose up -d"
