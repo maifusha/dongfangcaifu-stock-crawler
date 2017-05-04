@@ -28,3 +28,4 @@ scrapy crawl 蜘蛛名字  #启动蜘蛛开始爬取
 ```
 3. 在宿主机环境下`git`命令行提交代码
 4. 关闭环境请运行`docker-compose down`
+
