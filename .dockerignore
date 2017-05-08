@@ -7,5 +7,7 @@
 Dockerfile
 docker-compose.example.yml
 docker-compose.yml
+.env.example
+.env
 readme.md
 .gitattributes

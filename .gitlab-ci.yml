@@ -4,7 +4,7 @@ stages:
   - deploy
 
 variables:
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+  CONTAINER_CURRENT_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 before_script:
@@ -12,17 +12,19 @@ before_script:
 
 build_image:
   stage: build
+  only:
+    - master
   script:
-    - docker build --pull -t $CONTAINER_TEST_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
+    - docker build --pull -t $CONTAINER_CURRENT_IMAGE .
+    - docker push $CONTAINER_CURRENT_IMAGE
 
 release_image:
   stage: release
   only:
     - master
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker pull $CONTAINER_CURRENT_IMAGE
+    - docker tag $CONTAINER_CURRENT_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
 
 deploy_image:
@@ -35,4 +37,4 @@ deploy_image:
     - echo -e "$id_rsa" > id_rsa && chmod 600 id_rsa
     - echo -e "$known_hosts" > known_hosts && chmod 644 known_hosts
     - cd -
-    - ssh -p 8022 yunwei@118.89.177.52 "cd /srv/engine-cangweizaixian && docker-compose pull Cangweizaixian_Spider && docker-compose up -d"
+    - ssh -p 8022 yunwei@118.89.177.52 "cd /srv/engine-cangweizaixian && docker-compose pull Cangweizaixian_Spider && docker-compose restart Cangweizaixian_Spider"
