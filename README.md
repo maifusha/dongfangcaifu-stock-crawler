@@ -1,6 +1,6 @@
 > 仓位在线项目相关数据的爬虫
 
-[![build status](https://git.maifusha.com/crawler/cangweizaixian_crawl/badges/master/build.svg)](https://git.maifusha.com/crawler/cangweizaixian_crawl)
+[![build status](https://git.maifusha.com/crawler/cangweizaixian_crawl/badges/master/build.svg)](https://git.maifusha.com/crawler/cangweizaixian_crawl/commits/master)
 
 
 #### 注意事项
