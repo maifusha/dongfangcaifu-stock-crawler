@@ -1,4 +1,4 @@
-FROM 121.40.145.76:4567/docker/scrapy:latest
+FROM git.maifusha.com:5005/docker/scrapy:latest
 
 MAINTAINER edgar.li "1045909037@qq.com"
 
