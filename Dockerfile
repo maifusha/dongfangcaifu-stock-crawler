@@ -1,6 +1,6 @@
 FROM git.maifusha.com:5005/docker/scrapy:latest
 
-MAINTAINER edgar.li "1045909037@qq.com"
+MAINTAINER LiXin "1045909037@qq.com"
 
 COPY . /srv/crawl
 
