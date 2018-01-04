@@ -3,7 +3,7 @@ version: '2'
 services:
 
   Crawler:
-    image: 121.40.145.76:4567/docker/scrapy:latest
+    image: git.maifusha.com:5005/docker/scrapy:latest
     container_name: cangweizaixian_spider
     host_name: cangweizaixian_spider
     restart: always
@@ -15,7 +15,7 @@ services:
       - Redis
 
   Mysql:
-    image: 121.40.145.76:4567/docker/mysql:latest
+    image: git.maifusha.com:5005/docker/mysql:latest
     container_name: mysql
     hostname: mysql
     restart: always
@@ -27,7 +27,7 @@ services:
       - ./database/initdb:/docker-entrypoint-initdb.d
 
   Redis:
-    image: 121.40.145.76:4567/docker/redis:latest
+    image: git.maifusha.com:5005/docker/redis:latest
     container_name: redis
     hostname: redis
     restart: always
