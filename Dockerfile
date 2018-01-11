@@ -1,12 +1,10 @@
-FROM git.maifusha.com:5005/docker/scrapy:latest
+FROM 121.40.145.76:4567/docker/scrapy:latest
 
-MAINTAINER LiXin "1045909037@qq.com"
+MAINTAINER edgar.li "1045909037@qq.com"
 
 COPY . /srv/crawl
 
 COPY crontab /etc/crontabs/root
-
-VOLUME ["/var/log/scrapy.log", "/var/log/crond.log"]
 
 ENTRYPOINT ["crond", "-L", "/var/log/crond.log"]
 CMD ["tail", "-f", "/var/log/crond.log"]

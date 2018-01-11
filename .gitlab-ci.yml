@@ -37,4 +37,4 @@ deploy_image:
     - echo -e "$id_rsa" > id_rsa && chmod 600 id_rsa
     - echo -e "$known_hosts" > known_hosts && chmod 644 known_hosts
     - cd -
-    - ssh -p 8022 yunwei@118.89.177.52 "cd /srv/engine-cangweizaixian && docker-compose pull Cangweizaixian_Spider && docker-compose up -d --no-deps Cangweizaixian_Spider"
+    - ssh -p 8022 yunwei@122.152.208.150 "cd /srv/engine-cangweizaixian && docker-compose pull Cangweizaixian_Spider && docker-compose up -d --no-deps Cangweizaixian_Spider"
