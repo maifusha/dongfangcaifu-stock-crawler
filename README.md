@@ -1,6 +1,6 @@
 > 仓位在线项目相关数据的爬虫
 
-[![build status](https://121.40.145.76:8443/Crawler/cangweizaixian_spider/badges/master/build.svg)](https://121.40.145.76:8443/Crawler/cangweizaixian_spider/commits/master)
+[![build status](https://git.maifusha.com/crawler/cangweizaixian_crawl/badges/master/build.svg)](https://git.maifusha.com/crawler/cangweizaixian_crawl/commits/master)
 
 
 #### 注意事项
@@ -15,7 +15,7 @@
 #### 初次启动本地开发环境执行以下步骤
 1. 拷贝`.env.example`至`.env`（注意：这里环境变量配置直接照搬了cangweizaixian项目）
 2. 拷贝`docker-compose.example.yml`至`docker-compose.yml`
-3. 执行`docker login 121.40.145.76:4567`使用`Gitlab`账号登录项目私有`docker`镜像仓库`Container Registry`
+3. 执行`docker login git.maifusha.com:5005`使用`Gitlab`账号登录项目私有`docker`镜像仓库`Container Registry`
 4. 运行`docker-compose pull && docker-compose up -d`启动环境
 5. 确保已配置好仓位在线公众号项目中的数据库
 6. 关闭环境请运行`docker-compose down`
