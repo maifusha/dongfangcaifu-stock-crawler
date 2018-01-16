@@ -2,10 +2,10 @@ version: '2'
 
 services:
 
-  Crawler:
+  StockCrawler:
     image: git.maifusha.com:5005/docker/scrapy:latest
-    container_name: cangweizaixian_spider
-    hostname: cangweizaixian_spider
+    container_name: stock_crawler
+    hostname: stock_crawler
     restart: always
     env_file: .env
     volumes:

@@ -49,4 +49,3 @@ class ModelMixin:
         session.commit()
 
 BaseModel = declarative_base()
-
