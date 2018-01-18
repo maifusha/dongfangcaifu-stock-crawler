@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" A股名单爬虫 """
+""" A股名单爬虫：抓上证所和深圳所 """
 
 import scrapy
 import json
@@ -139,4 +139,3 @@ class StockOldsSpider(scrapy.Spider):
             stock.company_name = stock_data['company_name']
             stock.csrc_code = stock_data['csrc_code']
             stock.save()
-

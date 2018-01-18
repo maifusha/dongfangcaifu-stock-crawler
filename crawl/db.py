@@ -13,7 +13,7 @@ from sqlalchemy.ext.declarative import declarative_base
 _con_params = (
     'mysql',
     'mysqldb',
-    os.environ.get('MYSQL_USERNAME'),
+    os.environ.get('MYSQL_USER'),
     os.environ.get('MYSQL_PASSWORD'),
     os.environ.get('MYSQL_HOST'),
     os.environ.get('MYSQL_PORT'),
