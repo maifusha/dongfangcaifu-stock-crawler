@@ -13,7 +13,7 @@
 2. 拷贝`docker-compose.example.yml`至`docker-compose.yml`
 3. 执行`docker login git.maifusha.com:5005`使用`Gitlab`账号登录项目私有`docker`镜像仓库`Container Registry`
 4. 运行`docker-compose pull && docker-compose up -d`启动本地开发环境
-5. 确保已配置好关联数据库
+5. 确保已配置好相关数据表`stocks、stock_details、circulation_shareholders`
 6. 关闭环境请运行`docker-compose down`
 
 #### 日常开发工作
