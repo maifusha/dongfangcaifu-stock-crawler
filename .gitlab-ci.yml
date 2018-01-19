@@ -4,28 +4,26 @@ stages:
   - deploy
 
 variables:
-  CONTAINER_CURRENT_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+  BRANCH_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 before_script:
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build_image:
   stage: build
-  only:
-    - master
   script:
-    - docker build --pull -t $CONTAINER_CURRENT_IMAGE .
-    - docker push $CONTAINER_CURRENT_IMAGE
+    - docker build --pull -t $BRANCH_IMAGE .
+    - docker push $BRANCH_IMAGE
 
 release_image:
   stage: release
   only:
     - master
   script:
-    - docker pull $CONTAINER_CURRENT_IMAGE
-    - docker tag $CONTAINER_CURRENT_IMAGE $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
+    - docker pull $BRANCH_IMAGE
+    - docker tag $BRANCH_IMAGE $RELEASE_IMAGE
+    - docker push $RELEASE_IMAGE
 
 deploy_image:
   stage: deploy
@@ -33,8 +31,11 @@ deploy_image:
     - master
   when: manual
   script:
-    - mkdir -p ~/.ssh && cd ~/.ssh
-    - echo -e "$id_rsa" > id_rsa && chmod 600 id_rsa
-    - echo -e "$known_hosts" > known_hosts && chmod 644 known_hosts
-    - cd -
-    - ssh -p 8022 yunwei@122.152.208.150 "cd /srv/engine-cangweizaixian && docker-compose pull Cangweizaixian_Spider && docker-compose up -d --no-deps Cangweizaixian_Spider"
+    - mkdir ~/.ssh
+      && echo -n $id_rsa > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      && echo -n $known_hosts > ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
+    - ssh -p 8022 $manage_node_admin@$manage_node '
+        (docker pull $RELEASE_IMAGE && test -z "$(docker ps -qf name=stock_crawler)")
+          && docker run -d --name stock_crawler -e MYSQL_HOST=$MYSQL_HOST -e MYSQL_PORT=$MYSQL_PORT -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD --restart=always $RELEASE_IMAGE
+          || docker restart stock_crawler
+      '
