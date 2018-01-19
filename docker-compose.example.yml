@@ -2,10 +2,10 @@ version: '2'
 
 services:
 
-  StockCrawler:
+  Scrapy:
     image: git.maifusha.com:5005/docker/scrapy:latest
-    container_name: stock_crawler
-    hostname: stock_crawler
+    container_name: scrapy
+    hostname: scrapy
     restart: always
     env_file: .env
     volumes:
