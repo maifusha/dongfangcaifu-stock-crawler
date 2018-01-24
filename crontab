@@ -5,4 +5,3 @@
 
 0       0       *       *       *       sh /srv/crawl/run-spider.sh stocks #爬取股票名单
 30      15      *       *       *       sh /srv/crawl/run-spider.sh stock_details #爬取股票详情
-0      19       * 1,2,3,4,7,8,10 *      sh /srv/crawl/run-spider.sh circulation_shareholders #爬取流通股东

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" 上证所/深圳所：A股名单爬虫 """
+""" 上证所/深圳所：A股名单爬虫（已废弃） """
 
 import scrapy
 import json

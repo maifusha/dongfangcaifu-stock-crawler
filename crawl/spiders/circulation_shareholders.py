@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" 东方财富网：流通股东爬虫 """
+""" 东方财富网：流通股东爬虫（已废弃） """
 
 import scrapy
 import json
@@ -13,10 +13,10 @@ from crawl.models.CirculationShareholder import CirculationShareholder
 
 class CirculationShareholdersSpider(scrapy.Spider):
     name = "circulation_shareholders"
-    allowed_domains = ["f10.eastmoney.com"]
+    allowed_domains = ["emweb.securities.eastmoney.com"]
 
     date_tab = 1  #抓取流通股东的第几个日期Tab项
-    uri_tpl = 'http://f10.eastmoney.com/f10_v2/ShareholderResearch.aspx?code=%s%s'
+    uri_tpl = 'http://emweb.securities.eastmoney.com/f10_v2/ShareholderResearch.aspx?type=web&code=%s%s'
 
     def start_requests(self):
         for stock in Stock.query().order_by('code asc').all():
