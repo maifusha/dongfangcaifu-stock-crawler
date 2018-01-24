@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" A股名单爬虫：抓东方财富网 """
+""" 东方财富网：A股名单爬虫 """
 
 import re
 import scrapy
@@ -61,13 +61,13 @@ class StocksSpider(scrapy.Spider):
             self.page_total = int(resp['page_total'])
 
         for item in resp['list']:
-            item = item.encode('utf-8').split(',')
+            item = item.split(',')
 
             #不完整的股票信息
             stock = {
                 'exchange': helper.filter_value(self.exchange_map[item[0]], str),
                 'code': helper.filter_value(item[1], str),
-                'company_name': helper.filter_value(item[2], str),
+                'company_name': helper.filter_value(item[2], unicode),
             }
 
             #进入详情页获取其他信息

@@ -13,7 +13,7 @@
 2. 拷贝`docker-compose.example.yml`至`docker-compose.yml`
 3. 执行`docker login git.maifusha.com:5005`使用`Gitlab`账号登录项目私有`docker`镜像仓库`Container Registry`
 4. 运行`docker-compose pull && docker-compose up -d`启动本地开发环境
-5. 确保已配置好相关数据表`stocks、stock_details、circulation_shareholders`
+5. 配置数据表
 6. 关闭环境请运行`docker-compose down`
 
 #### 日常开发工作
@@ -25,6 +25,10 @@
 
 #### 数据表
 ```sql
+-- mysql容器首次启动回自动创建数据库 --
+
+ALTER DATABASE `crawler` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
 CREATE TABLE `stocks` (
     `code` CHAR(6) NOT NULL COMMENT '股票代码',
     `exchange` CHAR(2) NOT NULL COMMENT '交易所代码',
@@ -35,8 +39,8 @@ CREATE TABLE `stocks` (
     `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`code`)
 )
-COMMENT='股票名单表'
-COLLATE='latin1_swedish_ci'
+COMMENT='股票名单'
+DEFAULT CHARSET utf8 COLLATE utf8_general_ci
 ENGINE=InnoDB
 ;
 
@@ -56,7 +60,7 @@ CREATE TABLE `stock_details` (
     PRIMARY KEY (`id`)
 )
 COMMENT='股票行情'
-COLLATE='latin1_swedish_ci'
+DEFAULT CHARSET utf8 COLLATE utf8_general_ci
 ENGINE=InnoDB
 ;
 
@@ -75,7 +79,7 @@ CREATE TABLE `circulation_shareholders` (
     PRIMARY KEY (`id`)
 )
 COMMENT='十大流通股东'
-COLLATE='latin1_swedish_ci'
+DEFAULT CHARSET utf8 COLLATE utf8_general_ci
 ENGINE=InnoDB
 ;
 ```

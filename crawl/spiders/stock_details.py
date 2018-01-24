@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" 个股详情爬虫 """
+""" 东方财富网：个股详情爬虫 """
 
 import re
 import scrapy

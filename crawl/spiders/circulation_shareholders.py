@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" 流通股东爬虫 """
+""" 东方财富网：流通股东爬虫 """
 
 import scrapy
 import json
