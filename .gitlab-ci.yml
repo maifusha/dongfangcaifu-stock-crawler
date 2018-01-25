@@ -31,7 +31,7 @@ deploy_image:
     - master
   when: manual
   script:
-    - eval $(ssh-agent -s) && echo -n $id_rsa|ssh-add -
+    - eval $(ssh-agent -s) && echo -n "$id_rsa"|ssh-add -
     - ssh -o "StrictHostKeyChecking no" root@$node1
       "
         docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY};
