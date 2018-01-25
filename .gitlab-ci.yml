@@ -31,9 +31,12 @@ deploy_image:
     - master
   when: manual
   script:
-    - eval $(ssh-agent -s) && echo -n "$id_rsa"|ssh-add - 
-    - ssh -o "StrictHostKeyChecking no" root@$node1 "
-        (docker pull ${RELEASE_IMAGE} && test -z \"$(docker ps -qf name=stock_crawler)\")
+    - eval $(ssh-agent -s) && echo -n "$id_rsa"|ssh-add -
+    - ssh -o "StrictHostKeyChecking no" root@$node1 \
+      "
+        docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY};
+        docker pull ${RELEASE_IMAGE};
+        test -z \"$(docker ps -qf name=stock_crawler)\"
           && docker run -d --name stock_crawler -e MYSQL_HOST=${MYSQL_HOST} -e MYSQL_PORT=${MYSQL_PORT} -e MYSQL_DATABASE=${MYSQL_DATABASE} -e MYSQL_USER=${MYSQL_USER} -e MYSQL_PASSWORD=${MYSQL_PASSWORD} --restart=always ${RELEASE_IMAGE}
           || docker restart stock_crawler
       "
