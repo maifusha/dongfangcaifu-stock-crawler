@@ -1,6 +1,6 @@
-FROM git.maifusha.com:5005/docker/scrapy:latest
+FROM git.yoursite.com:5005/docker/scrapy:latest
 
-MAINTAINER LiXin "1045909037@qq.com"
+LABEL maintainer="lixin <1045909037@qq.com>"
 
 COPY . /srv/crawl
 

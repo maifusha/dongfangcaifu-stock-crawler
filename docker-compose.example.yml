@@ -3,7 +3,7 @@ version: '2'
 services:
 
   Scrapy:
-    image: git.maifusha.com:5005/docker/scrapy:latest
+    image: git.yoursite.com:5005/docker/scrapy:latest
     container_name: scrapy
     hostname: scrapy
     restart: always
@@ -14,7 +14,7 @@ services:
       - Mysql
 
   Mysql:
-    image: git.maifusha.com:5005/docker/mysql:latest
+    image: git.yoursite.com:5005/docker/mysql:latest
     container_name: mysql
     hostname: mysql
     restart: always

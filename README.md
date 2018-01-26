@@ -1,7 +1,9 @@
-> 股票数据的爬虫
+> 东方财富股票数据的爬虫
 
-[![build status](https://git.maifusha.com/crawler/stock_crawler/badges/master/build.svg)](https://git.maifusha.com/crawler/stock_crawler/commits/master)
-
+#### Badages
+```
+[![build status](https://git.yoursite.com/crawler/stock_crawler/badges/master/build.svg)](https://git.yoursite.com/crawler/stock_crawler/commits/master)
+```
 
 #### 本项目爬虫设计
 包含以下组件：
@@ -11,7 +13,7 @@
 #### 初次启动本地开发环境执行以下步骤
 1. 拷贝`.env.example`至`.env`
 2. 拷贝`docker-compose.example.yml`至`docker-compose.yml`
-3. 执行`docker login git.maifusha.com:5005`使用`Gitlab`账号登录项目私有`docker`镜像仓库`Container Registry`
+3. 执行`docker login git.yoursite.com:5005`使用`Gitlab`账号登录项目私有`docker`镜像仓库`Container Registry`
 4. 运行`docker-compose pull && docker-compose up -d`启动本地开发环境
 5. 配置数据表
 6. 关闭环境请运行`docker-compose down`
@@ -25,7 +27,7 @@
 
 #### 数据表
 ```sql
--- mysql容器首次启动回自动创建数据库 --
+-- mysql容器首次启动会回自动创建数据库 --
 
 ALTER DATABASE `crawler` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
